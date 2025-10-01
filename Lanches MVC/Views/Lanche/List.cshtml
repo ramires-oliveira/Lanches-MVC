@@ -1,0 +1,69 @@
+﻿@using System.Linq
+@model CategoriaListViewModel
+
+<div class="container my-5">
+    <h2 class="text-center mb-4 text-orange">🍔 Todos os Lanches</h2>
+
+    @foreach (var categoria in Model.Categorias)
+    {
+        var lanches = categoria.Lanches.ToList();
+        var carouselId = $"carousel-{categoria.CategoriaId}";
+
+        <div class="mb-5">
+            <h3 class="text-orange mb-2">@categoria.CategoriaNome</h3>
+            <p class="text-muted mb-3">
+                @(lanches.Any() ? $"{lanches.Count} lanche(s) nesta categoria" : "Nenhum lanche nesta categoria")
+            </p>
+
+            @if (lanches.Any())
+            {
+                <div id="@carouselId" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @{
+                            var total = lanches.Count;
+                            var groupSize = 2;
+                            var groups = lanches.Select((lanche, index) => new { lanche, index })
+                                                 .GroupBy(x => x.index / groupSize)
+                                                 .ToList();
+
+                            var slideIndex = 0;
+                            foreach (var group in groups)
+                            {
+                                var active = slideIndex == 0 ? "active" : "";
+                                <div class="carousel-item @active">
+                                    <div class="row justify-content-center">
+                                        @foreach (var item in group)
+                                        {
+                                            <div class="col-md-4 d-flex justify-content-center mb-3">
+                                                <div style="max-width: 420px; width:100%;">
+                                                    @await Html.PartialAsync("_LanchesCards", item.lanche)
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                slideIndex++;
+                            }
+                        }
+                    </div>
+
+                    @if (lanches.Count > 3)
+                    {
+                        <button class="carousel-control-prev" type="button" data-bs-target="#@carouselId" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Anterior</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#@carouselId" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Próximo</span>
+                        </button>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="text-muted">Ainda não há lanches cadastrados para esta categoria.</div>
+            }
+        </div>
+    }
+</div>

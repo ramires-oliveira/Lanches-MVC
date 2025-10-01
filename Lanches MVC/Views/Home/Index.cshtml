@@ -1,0 +1,21 @@
+﻿@model HomeViewModel
+
+<div class="container my-4">
+    <div class="container my-4">
+        <div class="text-center mb-5">
+            <h1 class="text-orange">🍔 Bem-vindo ao LanchesMVC</h1>
+            <p class="text-muted">Os lanches mais pedidos e amados pelos nossos clientes!</p>
+        </div>
+
+        <h2 class="mb-4 text-orange">⭐ Lanches Preferidos</h2>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var lanche in Model.LanchesPreferidos)
+            {
+                <div class="col">
+                    <partial name="_LanchesCards" for="@lanche" />
+                </div>
+            }
+        </div>
+    </div>
+</div>

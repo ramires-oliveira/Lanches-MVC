@@ -1,0 +1,60 @@
+﻿@model CarrinhoCompraViewModel
+
+<div class="container my-4">
+    <h2 class="text-center mb-4 text-orange">🛒 Meu Carrinho</h2>
+
+    <div class="table-responsive">
+        <table class="table table-dark table-hover align-middle">
+            <thead class="table-header">
+                <tr>
+                    <th scope="col">Imagem</th>
+                    <th scope="col">Lanche</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col">Preço Unitário</th>
+                    <th scope="col">Total</th>
+                    <th scope="col" class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.CarrinhoCompra.CarrinhoCompraItens.Any())
+                {
+                    @foreach (var item in Model.CarrinhoCompra.CarrinhoCompraItens)
+                    {
+                        <tr>
+                            <td>
+                                <img src="@item.Lanche.ImagemUrl" alt="@item.Lanche.Nome"
+                             class="img-thumbnail" style="width: 80px; height: 60px; object-fit: cover;">
+                            </td>
+                            <td class="text-orange fw-bold">@item.Lanche.Nome</td>
+                            <td class="text-muted small">@item.Lanche.DescricaoCurta</td>
+                            <td>@item.Quantidade</td>
+                            <td>@item.Lanche.Preco.ToString("c")</td>
+                            <td><strong class="text-orange">@((item.Quantidade * item.Lanche.Preco).ToString("c"))</strong></td>
+                            <td class="text-center">
+                                <form asp-action="RemoverItemCarrinhoCompra" asp-route-id="@item.Lanche.LancheId" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-outline-orange btn-sm">
+                                        ❌ Remover
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            Nenhum item no carrinho.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-between mt-4">
+        <a href="@Context.Request.Headers["Referer"]" class="btn btn-outline-orange btn-lg">Voltar</a>
+        <a href="#" class="btn btn-orange btn-lg">Finalizar Compra</a>
+    </div>
+</div>

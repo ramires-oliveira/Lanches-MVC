@@ -1,0 +1,48 @@
+﻿@model LanchesMVC.Models.Lanche
+
+<div class="card h-100 shadow-sm lanche-card">
+    <img src="@Model.ImagemUrl" class="card-img-top img-fluid" alt="@Model.Nome" style="object-fit: cover; height: 200px;">
+
+    <div class="card-body d-flex flex-column text-center">
+        <h5 class="card-title text-orange">@Model.Nome</h5>
+        <p class="card-text text-muted small">
+            @Model.DescricaoCurta
+        </p>
+        <p class="card-text text-light mb-3">
+            Preço: <strong class="text-orange">@Model.Preco.ToString("c")</strong>
+        </p>
+        <div class="mt-auto">
+            <a data-bs-toggle="modal" data-bs-target="#lancheModal-@Model.Nome.Replace(" ", "")" class="btn btn-orange btn-sm">Detalhes</a>
+            <a asp-controller="CarrinhoCompra" asp-action="AdicionarItemCarrinhoCompra" asp-route-lancheId="@Model.LancheId" class="btn btn-outline-orange btn-sm">Comprar</a>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="lancheModal-@Model.Nome.Replace(" ", "")" tabindex="-1" aria-labelledby="lancheModalLabel-@Model.Nome.Replace(" ", "")" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content lanche-card">
+            <div class="modal-header border-0">
+                <h5 class="modal-title text-orange" id="lancheModalLabel-@Model.Nome.Replace(" ", "")">@Model.Nome</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-5 text-center mb-3 mb-md-0">
+                        <img src="@Model.ImagemUrl" class="img-fluid rounded shadow-sm" alt="@Model.Nome" style="object-fit: cover; max-height: 280px;">
+                    </div>
+
+                    <div class="col-md-7">
+                        <p class="text-light"><strong>Descrição curta:</strong> @Model.DescricaoCurta</p>
+                        <p class="text-light"><strong>Descrição detalhada:</strong> @Model.DescricaoDetalhada</p>
+                        <p class="text-light"><strong>Preço:</strong> <span class="text-orange">@Model.Preco.ToString("c")</span></p>
+                        <p class="text-light"><strong>Disponível em estoque:</strong> @(Model.EmEstoque ? "✅ Sim" : "❌ Não")</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-outline-orange" data-bs-dismiss="modal">Fechar</button>
+                <a asp-controller="CarrinhoCompra" asp-action="AdicionarItemCarrinhoCompra" asp-route-lancheId="@Model.LancheId" class="btn btn-orange">Adicionar ao Carrinho</a>
+            </div>
+        </div>
+    </div>
+</div>

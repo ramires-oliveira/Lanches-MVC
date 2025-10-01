@@ -1,0 +1,10 @@
+﻿@model CarrinhoCompraViewModel
+
+<a asp-controller="CarrinhoCompra" asp-action="index">
+    <span>🛒</span>
+    <span class="badge bg-orange rounded-pill position-absolute top-0 start-100 translate-middle">
+        @Model.CarrinhoCompra.CarrinhoCompraItens.Count
+    </span>
+</a>
+
+
