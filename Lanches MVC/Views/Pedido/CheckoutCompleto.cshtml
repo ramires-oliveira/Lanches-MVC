@@ -1,0 +1,63 @@
+﻿@model Pedido
+
+<div class="container my-5 text-center text-light">
+    <div class="bg-dark p-5 rounded shadow-sm mx-auto" style="max-width: 700px;">
+        <h2 class="text-orange mb-3">🎉 Pedido Finalizado com Sucesso!</h2>
+
+        <p class="lead text-muted">
+            @ViewBag.CheckouCompleto
+        </p>
+
+        <hr class="border-orange my-4" />
+
+        <div class="mb-4">
+            <h5 class="text-orange">Resumo do Pedido</h5>
+            <p><strong>Total de Itens:</strong> @Model.TotalItensPedido</p>
+            <p><strong>Valor Total:</strong> R$ @ViewBag.TotalPedido.ToString("F2")</p>
+        </div>
+
+        <div class="mb-4">
+            <h5 class="text-orange">Dados do Cliente</h5>
+            <p><strong>Nome:</strong> @Model.Nome</p>
+            <p><strong>Endereço:</strong> @Model.Endereco1</p>
+            <p><strong>Cidade:</strong> @Model.Cidade</p>
+            <p><strong>Email:</strong> @Model.Email</p>
+        </div>
+
+        <hr class="border-orange my-4" />
+
+        <h5 class="text-orange mb-3">🍔 Seu pedido será preparado em breve!</h5>
+
+        <a asp-controller="Home" asp-action="Index" class="btn btn-orange mt-3">
+            ⬅️ Voltar à Página Inicial
+        </a>
+    </div>
+</div>
+
+<style>
+    .text-orange {
+        color: #ff6600 !important;
+    }
+
+    .border-orange {
+        border-top: 2px solid #ff6600;
+    }
+
+    .btn-orange {
+        background-color: #ff6600;
+        color: #fff;
+        border-radius: 8px;
+        padding: 10px 20px;
+        transition: all 0.2s ease-in-out;
+        text-decoration: none;
+    }
+
+    .btn-orange:hover {
+        background-color: #e65c00;
+        color: #fff;
+    }
+
+    .bg-dark {
+        background-color: #121212 !important;
+    }
+</style>

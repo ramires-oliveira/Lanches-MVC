@@ -27,7 +27,7 @@ namespace Lanches_MVC.Controllers
                 CarrinhoCompra = _carrinhoCompra,
                 CarrinhoCompraTotal = _carrinhoCompra.GetTotalCarrinhoCompra()
             };
-        
+
             return View(carrinhoCompraViewModel);
         }
 
@@ -35,7 +35,7 @@ namespace Lanches_MVC.Controllers
         {
             var lanche = _lancheRepository.Lanches.FirstOrDefault(x => x.LancheId == lancheId);
 
-            if(lanche != null)
+            if (lanche != null)
             {
                 _carrinhoCompra.AdicionarAoCarrinho(lanche);
             }
@@ -43,14 +43,23 @@ namespace Lanches_MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult RemoverItemCarrinhoCompra(int lancheId)
+        public IActionResult RemoverItemCarrinhoCompra(int CarrinhoCompraItemId)
         {
-            var lanche = _lancheRepository.Lanches.FirstOrDefault(x => x.LancheId == lancheId);
+            _carrinhoCompra.RemoverItemCarrinho(CarrinhoCompraItemId);
 
-            if (lanche != null)
-            {
-                _carrinhoCompra.RemoverItemCarrinho(lanche);
-            }
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult AdicionarQuantidadeCarrinhoCompra(int CarrinhoCompraItemId)
+        {
+            _carrinhoCompra.AdicionarQuantidade(CarrinhoCompraItemId);
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult DiminuirQuantidadeCarrinhoCompra(int CarrinhoCompraItemId)
+        {
+            _carrinhoCompra.DiminuirQuantidade(CarrinhoCompraItemId);
 
             return RedirectToAction("Index");
         }

@@ -107,3 +107,17 @@ a {
     background-color: #ff6600;
     color: #fff;
 }
+
+.border-orange {
+    border: 1px solid #ff6600 !important;
+}
+
+    .border-orange:focus {
+        border-color: #ff8533 !important;
+        box-shadow: 0 0 0 0.2rem rgba(255, 102, 0, 0.25);
+    }
+
+.form-control:focus {
+    background-color: #1c1c1c;
+    color: #fff;
+}
