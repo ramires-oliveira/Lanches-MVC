@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    var user = await UserManager.GetUserAsync(User);
+    <div class="d-flex align-items-center gap-3">
+        <span class="text-light">
+            👋 Olá, <strong class="text-orange">@user.UserName</strong>
+        </span>
+
+        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" class="m-0 p-0">
+            <button type="submit" class="btn btn-outline-orange btn-sm">Sair</button>
+        </form>
+    </div>
+}
+else
+{
+    <div class="d-flex align-items-center gap-3">
+        <a asp-area="" asp-controller="Account" asp-action="Login" asp-route-RetornoUrl="@string.Format("{0}{1}", Context.Request.Path, Context.Request.QueryString)" class="btn btn-outline-orange btn-sm">
+            🔐 Login
+        </a>
+        <a asp-area="" asp-controller="Account" asp-action="Registro" class="btn btn-orange btn-sm">
+            ✍️ Registrar-se
+        </a>
+    </div>
+}
