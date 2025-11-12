@@ -17,7 +17,7 @@ namespace Lanches_MVC.Models
         public string CarrinhoCompraId { get; set; }
 
         public List<CarrinhoCompraItem> CarrinhoCompraItens { get; set; }
-        
+
         public static CarrinhoCompra GetCarrinhoCompra(IServiceProvider services)
         {
             //Define sessão
@@ -40,7 +40,7 @@ namespace Lanches_MVC.Models
 
         public void AdicionarAoCarrinho(Lanche lanche)
         {
-            var carrinhoCompraItem = _context.CarrinhoCompraItens.SingleOrDefault(x => x.Lanche.LancheId == lanche.LancheId && 
+            var carrinhoCompraItem = _context.CarrinhoCompraItens.SingleOrDefault(x => x.Lanche.LancheId == lanche.LancheId &&
                     x.CarrinhoCompraId == CarrinhoCompraId);
 
             if (carrinhoCompraItem == null)
@@ -62,29 +62,21 @@ namespace Lanches_MVC.Models
             _context.SaveChanges();
         }
 
-        public int RemoverItemCarrinho(Lanche lanche)
+        public int RemoverItemCarrinho(int CarrinhoCompraItemId)
         {
-            var carrinhoCompraItem = _context.CarrinhoCompraItens.SingleOrDefault(x => x.Lanche.LancheId == lanche.LancheId &&
+            var carrinhoCompraItem = _context.CarrinhoCompraItens.SingleOrDefault(x => x.CarrinhoCompraItemId == CarrinhoCompraItemId &&
                 x.CarrinhoCompraId == CarrinhoCompraId);
 
             var quantidade = 0;
 
-            if(carrinhoCompraItem != null)
+            if (carrinhoCompraItem != null)
             {
-                if(carrinhoCompraItem.Quantidade > 1)
-                {
-                    carrinhoCompraItem.Quantidade--;
-                    quantidade = carrinhoCompraItem.Quantidade;
-                }
-                else
-                {
-                    _context.CarrinhoCompraItens.Remove(carrinhoCompraItem);
-                }
+                _context.CarrinhoCompraItens.Remove(carrinhoCompraItem);
             }
             _context.SaveChanges();
             return quantidade;
         }
-            
+
         public List<CarrinhoCompraItem> GetCarrinhoCompraItems()
         {
             return CarrinhoCompraItens ?? (CarrinhoCompraItens = _context.CarrinhoCompraItens
@@ -108,5 +100,32 @@ namespace Lanches_MVC.Models
 
             return total;
         }
+
+        public void AdicionarQuantidade(int carrinhoCompraItemId)
+        {
+            var item = _context.CarrinhoCompraItens.FirstOrDefault(x => x.CarrinhoCompraItemId == carrinhoCompraItemId
+                                                                    && x.CarrinhoCompraId == CarrinhoCompraId);
+            if (item != null)
+            {
+                item.Quantidade++;
+                _context.SaveChanges();
+            }
+        }
+
+        public void DiminuirQuantidade(int carrinhoCompraItemId)
+        {
+            var item = _context.CarrinhoCompraItens.FirstOrDefault(x => x.CarrinhoCompraItemId == carrinhoCompraItemId
+                                                                    && x.CarrinhoCompraId == CarrinhoCompraId);
+            if (item != null)
+            {
+                if (item.Quantidade > 1)
+                    item.Quantidade--;
+                else
+                    _context.CarrinhoCompraItens.Remove(item);
+
+                _context.SaveChanges();
+            }
+        }
+
     }
 }

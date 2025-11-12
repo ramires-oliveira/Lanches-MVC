@@ -4,6 +4,12 @@
 <div class="container my-5">
     <h2 class="text-center mb-4 text-orange">🍔 Todos os Lanches</h2>
 
+    <form asp-controller="Lanche" asp-action="List" method="get" class="d-flex justify-content-center mb-4">
+        <input type="text" name="searchString" value="@ViewBag.SearchString" class="form-control me-2 bg-dark text-light border-orange" 
+               placeholder="Buscar lanche por nome..." style="max-width: 400px;">
+        <button type="submit" class="btn btn-orange">Pesquisar</button>
+    </form>
+
     @foreach (var categoria in Model.Categorias)
     {
         var lanches = categoria.Lanches.ToList();
