@@ -1,0 +1,76 @@
+## .gitignore para projeto ASP.NET Core MVC (.NET 6)
+
+# Arquivos e pastas de configuração do Visual Studio
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.rsuser
+
+# Pastas de build e logs
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+[Tt]emp/
+[Tt]emporary ASP.NET Files/
+DesignTimeBuild/
+
+# Arquivos temporários e caches
+*.dtbcache.v2
+*.vsidx
+*.futdcache.v2
+*.cache
+*.pdb
+*.obj
+*.log
+*.tmp
+
+# Dados de scaffolding e backup
+ScaffoldingReadMe.txt
+*.bak
+*.backup
+*.orig
+
+# Banco de dados local
+*.mdf
+*.ldf
+
+# Diretórios de publicação
+publish/
+app.publish/
+out/
+
+# Arquivos de pacotes e dependências
+node_modules/
+packages/
+*.nupkg
+*.snupkg
+.nuget/
+
+# Cobertura de testes e resultados
+*.coverage
+*.coveragexml
+TestResults/
+
+# Arquivos de configuração locais
+*.env
+*.secret.json
+
+# Arquivos de IDE e ferramentas
+_ReSharper*/
+*.DotSettings.user
+*.tlog
+*.dbmdl
+
+# Arquivos de sistema
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Configurações opcionais
+.vsconfig
