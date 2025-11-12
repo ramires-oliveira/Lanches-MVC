@@ -1,0 +1,47 @@
+﻿@model LoginViewModel
+
+<div class="container my-5 d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card bg-dark text-light shadow-lg p-4" style="max-width: 500px; width: 100%; border-radius: 15px;">
+        <h2 class="text-center mb-4 text-orange">📝 Criar Conta</h2>
+
+        <form asp-action="Registro" method="post" novalidate>
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div asp-validation-summary="All" class="alert alert-danger text-center p-2" role="alert"></div>
+            }
+
+            <div class="mb-3">
+                <label asp-for="NomeUsuario" class="form-label text-light"></label>
+                <input asp-for="NomeUsuario" class="form-control bg-dark text-light border-orange" placeholder="Nome do usuário" />
+                <span asp-validation-for="NomeUsuario" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label text-light"></label>
+                <input asp-for="Email" class="form-control bg-dark text-light border-orange" placeholder="exemplo@email.com" />
+                <span asp-validation-for="Email" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Senha" class="form-label text-light"></label>
+                <input asp-for="Senha" class="form-control bg-dark text-light border-orange" placeholder="••••••••" />
+                <span asp-validation-for="Senha" class="text-danger small"></span>
+            </div>
+
+            <div class="d-grid mb-3">
+                <button type="submit" class="btn btn-orange btn-lg">Cadastrar</button>
+            </div>
+
+            <div class="text-center">
+                <p class="small text-muted mb-0">
+                    Já tem uma conta?
+                    <a href="/Account/Login" class="text-orange text-decoration-none">Entrar</a>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
