@@ -46,9 +46,9 @@ namespace Lanches_MVC.Controllers
         }
 
         [Authorize]
-        public IActionResult RemoverItemCarrinhoCompra(int lancheId)
+        public IActionResult RemoverItemCarrinhoCompra(int carrinhoCompraItemId)
         {
-            _carrinhoCompra.RemoverItemCarrinho(CarrinhoCompraItemId);
+            _carrinhoCompra.RemoverItemCarrinho(carrinhoCompraItemId);
 
             return RedirectToAction("Index");
         }
