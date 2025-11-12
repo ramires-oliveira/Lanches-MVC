@@ -28,15 +28,22 @@
                             </td>
                             <td class="text-orange fw-bold">@item.Lanche.Nome</td>
                             <td class="text-muted small">@item.Lanche.DescricaoCurta</td>
-                            <td>@item.Quantidade</td>
+                            <td class="text-center align-middle">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <a asp-controller="CarrinhoCompra" asp-action="DiminuirQuantidadeCarrinhoCompra" asp-route-carrinhoCompraItemId="@item.CarrinhoCompraItemId" class="btn btn-outline-orange btn-sm mx-1">−</a>
+                                    <span class="fw-bold">@item.Quantidade</span>
+                                    <a asp-controller="CarrinhoCompra" asp-action="AdicionarQuantidadeCarrinhoCompra" asp-route-carrinhoCompraItemId="@item.CarrinhoCompraItemId" class="btn btn-outline-orange btn-sm mx-1">+</a>
+                                </div>
+                            </td>
+
                             <td>@item.Lanche.Preco.ToString("c")</td>
                             <td><strong class="text-orange">@((item.Quantidade * item.Lanche.Preco).ToString("c"))</strong></td>
                             <td class="text-center">
-                                <form asp-action="RemoverItemCarrinhoCompra" asp-route-id="@item.Lanche.LancheId" method="post" class="d-inline">
-                                    <button type="submit" class="btn btn-outline-orange btn-sm">
+                                <div class="d-inline">
+                                    <a asp-controller="CarrinhoCompra" asp-action="RemoverItemCarrinhoCompra" asp-route-CarrinhoCompraItemId="@item.CarrinhoCompraItemId" class="btn btn-outline-orange btn-sm">
                                         ❌ Remover
-                                    </button>
-                                </form>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     }
@@ -54,7 +61,7 @@
     </div>
 
     <div class="d-flex justify-content-between mt-4">
-        <a href="@Context.Request.Headers["Referer"]" class="btn btn-outline-orange btn-lg">Voltar</a>
-        <a href="#" class="btn btn-orange btn-lg">Finalizar Compra</a>
+        <a href="#" onclick="window.history.back(); return false;" class="btn btn-outline-orange btn-lg">@(Model.CarrinhoCompra.CarrinhoCompraItens.Any() ? "Continuar Comprando" : "Voltar")</a>
+        <a asp-controller="Pedido" asp-action="Checkout" asp-route-lancheId="@Model.CarrinhoCompra" class="btn btn-orange btn-lg">Finalizar Compra</a>
     </div>
 </div>
