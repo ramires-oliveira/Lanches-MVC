@@ -1,0 +1,71 @@
+﻿@model LanchesMVC.Models.Lanche
+
+@{
+    ViewData["Title"] = "Excluir Lanche";
+}
+
+<div class="container my-5">
+
+    <h2 class="text-center mb-4 text-orange">🗑 Excluir Lanche</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+
+            <div class="bg-dark p-4 rounded shadow-sm">
+
+                <h4 class="text-orange mb-3">Confirma a exclusão?</h4>
+                <p class="text-light">
+                    Esta ação não poderá ser desfeita.
+                </p>
+
+                <hr class="border-orange" />
+
+                <dl class="row text-light">
+
+                    <dt class="col-sm-4">Nome:</dt>
+                    <dd class="col-sm-8">@Model.Nome</dd>
+
+                    <dt class="col-sm-4">Descrição Curta:</dt>
+                    <dd class="col-sm-8">@Model.DescricaoCurta</dd>
+
+                    <dt class="col-sm-4">Preço:</dt>
+                    <dd class="col-sm-8">R$ @Model.Preco.ToString("N2")</dd>
+
+                    <dt class="col-sm-4">Categoria:</dt>
+                    <dd class="col-sm-8">@Model.Categoria?.CategoriaNome</dd>
+
+                    <dt class="col-sm-4">Imagem:</dt>
+                    <dd class="col-sm-8">
+                        <img src="@Model.ImagemUrl"
+                             alt="Imagem do lanche"
+                             class="img-fluid rounded border-orange"
+                             style="max-height:130px;" />
+                    </dd>
+
+                </dl>
+
+                <hr class="border-orange my-4" />
+
+                <form asp-action="Delete" method="post" class="d-flex justify-content-between">
+
+                    <input type="hidden" asp-for="LancheId" />
+
+                    <a asp-action="Index"
+                       asp-area="Admin"
+                       asp-controller="AdminLanches"
+                       class="btn btn-outline-orange">
+                        ⬅ Cancelar
+                    </a>
+
+                    <button type="submit" class="btn btn-danger btn-lg">
+                        🗑 Excluir
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,57 @@
+﻿@model LanchesMVC.Models.Categoria
+
+@{
+    ViewData["Title"] = "Cadastrar Categoria";
+}
+
+<div class="container my-5">
+
+    <h2 class="text-center mb-4 text-orange">📂 Cadastrar Categoria</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+
+            <form asp-action="Create" method="post" class="bg-dark p-4 rounded shadow-sm">
+
+                <h4 class="text-orange mb-3">Informações da Categoria</h4>
+                <hr class="border-orange" />
+
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                <div class="mb-3">
+                    <label asp-for="CategoriaNome" class="form-label text-light"></label>
+                    <input asp-for="CategoriaNome" class="form-control bg-dark text-light border-orange" />
+                    <span asp-validation-for="CategoriaNome" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Descricao" class="form-label text-light"></label>
+                    <input asp-for="Descricao" class="form-control bg-dark text-light border-orange" />
+                    <span asp-validation-for="Descricao" class="text-danger"></span>
+                </div>
+
+                <hr class="border-orange my-4" />
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index"
+                       asp-area="Admin"
+                       asp-controller="AdminCategorias"
+                       class="btn btn-outline-orange">
+                        ⬅ Voltar
+                    </a>
+
+                    <button type="submit" class="btn btn-orange btn-lg">
+                        ✔ Cadastrar Categoria
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

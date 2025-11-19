@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Lanches_MVC.Models.Pedido>
+
+@{
+    ViewData["Title"] = "Pedidos";
+}
+
+<div class="container my-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-orange">📦 Pedidos Realizados</h2>
+
+        <a asp-action="Create"
+           class="btn btn-orange btn-lg">
+            ➕ Novo Pedido
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-dark table-hover align-middle">
+            <thead class="table-header">
+                <tr>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>Endereço</th>
+                    <th>CEP</th>
+                    <th>Estado</th>
+                    <th>Cidade</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                    <th>Enviado?</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-light">@item.Nome</td>
+                        <td class="text-light">@item.Sobrenome</td>
+                        <td class="text-muted">@item.Endereco1 @item.Endereco2</td>
+                        <td class="text-light">@item.Cep</td>
+                        <td class="text-light">@item.Estado</td>
+                        <td class="text-light">@item.Cidade</td>
+                        <td class="text-light">@item.Telefone</td>
+                        <td class="text-light">@item.Email</td>
+
+                        <td class="text-light">
+                            @(item.PedidoEnviado.ToString() != "" ? "📤 Sim" : "—")
+                        </td>
+
+                        <td class="text-center">
+                            <div class="d-flex justify-content-center gap-2">
+
+                                <a asp-action="Edit"
+                               asp-route-id="@item.PedidoId"
+                               class="btn btn-outline-orange btn-sm">
+                                    ✏️
+                                </a>
+
+                                <a asp-action="Details"
+                               asp-route-id="@item.PedidoId"
+                               class="btn btn-outline-light btn-sm">
+                                    🔍
+                                </a>
+
+                                <a asp-action="Delete"
+                               asp-route-id="@item.PedidoId"
+                               class="btn btn-outline-danger btn-sm">
+                                    🗑
+                                </a>
+
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

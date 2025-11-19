@@ -1,0 +1,77 @@
+﻿@model LanchesMVC.Models.Lanche
+
+@{
+    ViewData["Title"] = "Detalhes do Lanche";
+}
+
+<div class="container my-5">
+
+    <h2 class="text-orange mb-4">🔍 Detalhes do Lanche</h2>
+
+    <div class="card bg-dark text-light shadow rounded p-4">
+
+        <h4 class="text-orange mb-3">@Model.Nome</h4>
+
+        <div class="row">
+
+            <div class="col-md-4 mb-4 text-center">
+                <img src="@Model.ImagemUrl"
+                     alt="@Model.Nome"
+                     class="img-fluid rounded shadow-sm border border-orange" />
+            </div>
+
+            <div class="col-md-8">
+
+                <dl class="row">
+
+                    <dt class="col-sm-4 text-orange">Nome</dt>
+                    <dd class="col-sm-8">@Model.Nome</dd>
+
+                    <dt class="col-sm-4 text-orange">Descrição Curta</dt>
+                    <dd class="col-sm-8">@Model.DescricaoCurta</dd>
+
+                    <dt class="col-sm-4 text-orange">Descrição Detalhada</dt>
+                    <dd class="col-sm-8">@Model.DescricaoDetalhada</dd>
+
+                    <dt class="col-sm-4 text-orange">Preço</dt>
+                    <dd class="col-sm-8">R$ @Model.Preco</dd>
+
+                    <dt class="col-sm-4 text-orange">Preferido?</dt>
+                    <dd class="col-sm-8">
+                        @(Model.IsLanchePreferido ? "Sim ⭐" : "Não")
+                    </dd>
+
+                    <dt class="col-sm-4 text-orange">Estoque</dt>
+                    <dd class="col-sm-8">
+                        @(Model.EmEstoque ? "Disponível" : "Indisponível")
+                    </dd>
+
+                    <dt class="col-sm-4 text-orange">Categoria</dt>
+                    <dd class="col-sm-8">@Model.Categoria.CategoriaNome</dd>
+
+                </dl>
+
+            </div>
+        </div>
+
+        <hr class="border-orange" />
+
+        <div class="d-flex justify-content-between">
+            <a asp-area="Admin"
+               asp-controller="AdminLanches"
+               asp-action="Index"
+               class="btn btn-outline-light">
+                ⬅ Voltar
+            </a>
+
+            <a asp-area="Admin"
+               asp-controller="AdminLanches"
+               asp-action="Edit"
+               asp-route-id="@Model.LancheId"
+               class="btn btn-orange">
+                ✏️ Editar Lanche
+            </a>
+        </div>
+
+    </div>
+</div>

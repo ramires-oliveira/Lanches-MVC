@@ -1,0 +1,105 @@
+﻿@model LanchesMVC.Models.Lanche
+
+@{
+    ViewData["Title"] = "Editar Lanche";
+}
+
+<div class="container my-5">
+
+    <h2 class="text-orange mb-4">✏️ Editar Lanche</h2>
+
+    <div class="card bg-dark text-light shadow rounded p-4">
+
+        <form asp-action="Edit">
+
+            <h4 class="text-orange mb-3">Informações do Lanche</h4>
+            <hr class="border-orange" />
+
+            <input type="hidden" asp-for="LancheId" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="row">
+
+                <div class="mb-3 col-md-6">
+                    <label asp-for="Nome" class="form-label text-light"></label>
+                    <input asp-for="Nome" class="form-control bg-dark text-light border-orange" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 col-md-6">
+                    <label asp-for="Preco" class="form-label text-light"></label>
+                    <input asp-for="Preco" class="form-control bg-dark text-light border-orange" />
+                    <span asp-validation-for="Preco" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DescricaoCurta" class="form-label text-light"></label>
+                    <input asp-for="DescricaoCurta" class="form-control bg-dark text-light border-orange" />
+                    <span asp-validation-for="DescricaoCurta" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DescricaoDetalhada" class="form-label text-light"></label>
+                    <textarea asp-for="DescricaoDetalhada"
+                              class="form-control bg-dark text-light border-orange"
+                              rows="4"></textarea>
+                    <span asp-validation-for="DescricaoDetalhada" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 col-md-6">
+                    <label asp-for="ImagemUrl" class="form-label text-light"></label>
+                    <input asp-for="ImagemUrl" class="form-control bg-dark text-light border-orange" />
+                    <span asp-validation-for="ImagemUrl" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 col-md-6">
+                    <label asp-for="ImagemThumbnailUrl" class="form-label text-light"></label>
+                    <input asp-for="ImagemThumbnailUrl" class="form-control bg-dark text-light border-orange" />
+                    <span asp-validation-for="ImagemThumbnailUrl" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Categoria" class="form-label text-light"></label>
+                    <select asp-for="CategoriaId"
+                            class="form-control bg-dark text-light border-orange"
+                            asp-items="ViewBag.CategoriaId">
+                    </select>
+                    <span asp-validation-for="CategoriaId" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 d-flex align-items-center gap-4 mt-3">
+
+                    <div class="form-check">
+                        <input class="form-check-input bg-dark border-orange" asp-for="IsLanchePreferido" />
+                        <label class="form-check-label text-light" asp-for="IsLanchePreferido"></label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input bg-dark border-orange" asp-for="EmEstoque" />
+                        <label class="form-check-label text-light" asp-for="EmEstoque"></label>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr class="border-orange my-4" />
+
+            <div class="d-flex justify-content-between">
+                <a asp-area="Admin"
+                   asp-controller="AdminLanches"
+                   asp-action="Index"
+                   class="btn btn-outline-light">
+                    ⬅ Voltar
+                </a>
+
+                <button type="submit" class="btn btn-orange btn-lg">
+                    💾 Salvar Alterações
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
