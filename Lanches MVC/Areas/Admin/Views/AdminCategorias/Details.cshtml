@@ -1,0 +1,51 @@
+﻿@model LanchesMVC.Models.Categoria
+
+@{
+    ViewData["Title"] = "Detalhes da Categoria";
+}
+
+<div class="container my-5">
+
+    <h2 class="text-center mb-4 text-orange">📁 Detalhes da Categoria</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+
+            <div class="bg-dark p-4 rounded shadow-sm">
+
+                <h4 class="text-orange mb-3">@Model.CategoriaNome</h4>
+                <hr class="border-orange" />
+
+                <dl class="row text-light mt-3">
+
+                    <dt class="col-sm-4 text-orange">Nome</dt>
+                    <dd class="col-sm-8">@Model.CategoriaNome</dd>
+
+                    <dt class="col-sm-4 text-orange">Descrição</dt>
+                    <dd class="col-sm-8">@Model.Descricao</dd>
+
+                </dl>
+
+                <hr class="border-orange my-4" />
+
+                <div class="d-flex justify-content-between">
+
+                    <a asp-action="Index"
+                       class="btn btn-outline-light">
+                        ⬅ Voltar
+                    </a>
+
+                    <a asp-action="Edit"
+                       asp-route-id="@Model?.CategoriaId"
+                       class="btn btn-orange">
+                        ✏ Editar
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

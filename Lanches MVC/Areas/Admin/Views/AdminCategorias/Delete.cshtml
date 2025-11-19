@@ -1,0 +1,52 @@
+﻿@model LanchesMVC.Models.Categoria
+
+@{
+    ViewData["Title"] = "Excluir Categoria";
+}
+
+<div class="container my-5">
+
+    <h2 class="text-center mb-4 text-orange">🗑 Excluir Categoria</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+
+            <div class="bg-dark p-4 rounded shadow-sm">
+
+                <h4 class="text-orange mb-3">Confirma a exclusão?</h4>
+                <p class="text-light">
+                    Esta ação não poderá ser desfeita.
+                </p>
+
+                <hr class="border-orange" />
+
+                <dl class="row text-light">
+                    <dt class="col-sm-3">Nome:</dt>
+                    <dd class="col-sm-9">@Model.CategoriaNome</dd>
+
+                    <dt class="col-sm-3">Descrição:</dt>
+                    <dd class="col-sm-9">@Model.Descricao</dd>
+                </dl>
+
+                <hr class="border-orange my-4" />
+
+                <form asp-action="Delete" method="post" class="d-flex justify-content-between">
+
+                    <input type="hidden" asp-for="CategoriaId" />
+
+                    <a asp-action="Index" class="btn btn-outline-orange">
+                        ⬅ Cancelar
+                    </a>
+
+                    <button type="submit" class="btn btn-danger btn-lg">
+                        🗑 Excluir
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

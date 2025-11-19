@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "pQkULSzpBwpm2ST839A9ew//xvJO+3B7NZUaPVObMFo=",
+  "Hash": "koKy3w/9PA2khGeSUWAl2PV/zM67TRjkYbTL3egim5U=",
   "Source": "Lanches MVC",
   "BasePath": "_content/Lanches MVC",
   "Mode": "Default",
@@ -100,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\carousel11.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\User\\Documents\\Estudos 2023\\Lanches MVC\\Lanches MVC\\wwwroot\\images\\carousel12 - Cópia.jpg",
+      "SourceId": "Lanches MVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\Documents\\Estudos 2023\\Lanches MVC\\Lanches MVC\\wwwroot\\",
+      "BasePath": "_content/Lanches MVC",
+      "RelativePath": "images/carousel12 - Cópia.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\carousel12 - Cópia.jpg"
     },
     {
       "Identity": "C:\\Users\\User\\Documents\\Estudos 2023\\Lanches MVC\\Lanches MVC\\wwwroot\\images\\carousel12.jpg",

@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Acesso Negado";
+}
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="text-center bg-dark p-5 rounded shadow" style="max-width: 500px; width:100%;">
+
+        <div class="mb-4">
+            <span style="font-size: 4rem;">🚫</span>
+        </div>
+
+        <h2 class="text-orange mb-3">Acesso Negado</h2>
+
+        <p class="text-light mb-4">
+            Você não possui permissão para acessar este recurso.
+        </p>
+
+        <div class="d-grid gap-2">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-orange btn-lg">
+                Voltar para a Página Inicial
+            </a>
+
+            <a asp-controller="Account" asp-action="Login" class="btn btn-outline-orange btn-lg">
+                Fazer Login com outra conta
+            </a>
+        </div>
+    </div>
+</div>

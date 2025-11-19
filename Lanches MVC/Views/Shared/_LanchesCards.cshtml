@@ -13,7 +13,10 @@
         </p>
         <div class="mt-auto">
             <a data-bs-toggle="modal" data-bs-target="#lancheModal-@Model.Nome.Replace(" ", "")" class="btn btn-orange btn-sm">Detalhes</a>
-            <a asp-controller="CarrinhoCompra" asp-action="AdicionarItemCarrinhoCompra" asp-route-lancheId="@Model.LancheId" class="btn btn-outline-orange btn-sm">Comprar</a>
+            @if (!User.IsInRole("Admin"))
+            {
+                <a asp-controller="CarrinhoCompra" asp-action="AdicionarItemCarrinhoCompra" asp-route-lancheId="@Model.LancheId" class="btn btn-outline-orange btn-sm">Comprar</a>
+            }
         </div>
     </div>
 </div>
@@ -41,7 +44,10 @@
             </div>
             <div class="modal-footer border-0">
                 <button type="button" class="btn btn-outline-orange" data-bs-dismiss="modal">Fechar</button>
-                <a asp-controller="CarrinhoCompra" asp-action="AdicionarItemCarrinhoCompra" asp-route-lancheId="@Model.LancheId" class="btn btn-orange">Adicionar ao Carrinho</a>
+                @if (!User.IsInRole("Admin"))
+                {
+                    <a asp-controller="CarrinhoCompra" asp-action="AdicionarItemCarrinhoCompra" asp-route-lancheId="@Model.LancheId" class="btn btn-orange">Adicionar ao Carrinho</a>
+                }
             </div>
         </div>
     </div>
