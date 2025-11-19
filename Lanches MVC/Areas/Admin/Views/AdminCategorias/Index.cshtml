@@ -1,0 +1,70 @@
+﻿@model IEnumerable<LanchesMVC.Models.Categoria>
+
+@{
+    ViewData["Title"] = "Categorias";
+}
+
+<div class="container my-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-orange">📂 Categorias Cadastradas</h2>
+
+        <a asp-area="Admin"
+           asp-controller="AdminCategorias"
+           asp-action="Create"
+           class="btn btn-orange btn-lg">
+            ➕ Nova Categoria
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-dark table-hover align-middle">
+            <thead class="table-header">
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-light">@item.CategoriaNome</td>
+                        <td class="text-muted">@item.Descricao</td>
+
+                        <td class="text-center">
+
+                            <a asp-area="Admin"
+                           asp-controller="AdminCategorias"
+                           asp-action="Edit"
+                           asp-route-id="@item.CategoriaId"
+                           class="btn btn-outline-orange btn-sm me-2">
+                                ✏️ Editar
+                            </a>
+
+                            <a asp-area="Admin"
+                           asp-controller="AdminCategorias"
+                           asp-action="Details"
+                           asp-route-id="@item.CategoriaId"
+                           class="btn btn-outline-light btn-sm me-2">
+                                🔍 Detalhes
+                            </a>
+
+                            <a asp-area="Admin"
+                           asp-controller="AdminCategorias"
+                           asp-action="Delete"
+                           asp-route-id="@item.CategoriaId"
+                           class="btn btn-outline-danger btn-sm">
+                                🗑 Excluir
+                            </a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

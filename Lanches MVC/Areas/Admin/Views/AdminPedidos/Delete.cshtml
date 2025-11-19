@@ -1,0 +1,83 @@
+﻿@model Lanches_MVC.Models.Pedido
+
+@{
+    ViewData["Title"] = "Excluir Pedido";
+}
+
+<div class="container my-5">
+
+    <h2 class="text-center mb-4 text-orange">🗑 Excluir Pedido</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+
+            <div class="bg-dark p-4 rounded shadow-sm">
+
+                <h4 class="text-orange mb-3">Confirma a exclusão?</h4>
+                <p class="text-light">
+                    Esta ação não poderá ser desfeita.
+                </p>
+
+                <hr class="border-orange" />
+
+                <dl class="row text-light">
+
+                    <dt class="col-sm-4">Nome:</dt>
+                    <dd class="col-sm-8">@Model.Nome @Model.Sobrenome</dd>
+
+                    <dt class="col-sm-4">Endereço:</dt>
+                    <dd class="col-sm-8">
+                        @Model.Endereco1<br />
+                        @if (!string.IsNullOrEmpty(Model.Endereco2))
+                        {
+                            @Model.Endereco2
+
+                            <br />
+                        }
+                        @Model.Cidade - @Model.Estado<br />
+                        CEP: @Model.Cep
+                    </dd>
+
+                    <dt class="col-sm-4">Telefone:</dt>
+                    <dd class="col-sm-8">@Model.Telefone</dd>
+
+                    <dt class="col-sm-4">Email:</dt>
+                    <dd class="col-sm-8">@Model.Email</dd>
+
+                    <dt class="col-sm-4">Pedido Enviado:</dt>
+                    <dd class="col-sm-8">@Model.PedidoEnviado</dd>
+
+                    <dt class="col-sm-4">Pedido Entregue:</dt>
+                    <dd class="col-sm-8">
+                        @(Model.PedidoEntregueEm?.ToString() ?? "Ainda não entregue")
+                    </dd>
+
+                </dl>
+
+                <hr class="border-orange my-4" />
+
+                <form asp-action="Delete"
+                      method="post"
+                      class="d-flex justify-content-between">
+
+                    <input type="hidden" asp-for="PedidoId" />
+
+                    <a asp-action="Index"
+                       asp-controller="AdminPedidos"
+                       asp-area="Admin"
+                       class="btn btn-outline-orange">
+                        ⬅ Cancelar
+                    </a>
+
+                    <button type="submit" class="btn btn-danger btn-lg">
+                        🗑 Excluir
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,75 @@
+﻿@model Lanches_MVC.Models.Pedido
+
+@{
+    ViewData["Title"] = "Detalhes do Pedido";
+}
+
+<div class="container my-5">
+
+    <h2 class="text-orange mb-4">🔍 Detalhes do Pedido</h2>
+
+    <div class="card bg-dark text-light shadow rounded p-4">
+
+        <h4 class="text-orange mb-3">Pedido Nº @Model.PedidoId</h4>
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <dl class="row">
+
+                    <dt class="col-sm-3 text-orange">Nome</dt>
+                    <dd class="col-sm-9">@Model.Nome</dd>
+
+                    <dt class="col-sm-3 text-orange">Sobrenome</dt>
+                    <dd class="col-sm-9">@Model.Sobrenome</dd>
+
+                    <dt class="col-sm-3 text-orange">Endereço 1</dt>
+                    <dd class="col-sm-9">@Model.Endereco1</dd>
+
+                    <dt class="col-sm-3 text-orange">Endereço 2</dt>
+                    <dd class="col-sm-9">@Model.Endereco2</dd>
+
+                    <dt class="col-sm-3 text-orange">CEP</dt>
+                    <dd class="col-sm-9">@Model.Cep</dd>
+
+                    <dt class="col-sm-3 text-orange">Estado</dt>
+                    <dd class="col-sm-9">@Model.Estado</dd>
+
+                    <dt class="col-sm-3 text-orange">Cidade</dt>
+                    <dd class="col-sm-9">@Model.Cidade</dd>
+
+                    <dt class="col-sm-3 text-orange">Telefone</dt>
+                    <dd class="col-sm-9">@Model.Telefone</dd>
+
+                    <dt class="col-sm-3 text-orange">Email</dt>
+                    <dd class="col-sm-9">@Model.Email</dd>
+
+                    <dt class="col-sm-3 text-orange">Enviado em</dt>
+                    <dd class="col-sm-9">@Model.PedidoEnviado</dd>
+
+                    <dt class="col-sm-3 text-orange">Entregue em</dt>
+                    <dd class="col-sm-9">@Model.PedidoEntregueEm</dd>
+
+                </dl>
+
+            </div>
+        </div>
+
+        <hr class="border-orange" />
+
+        <div class="d-flex justify-content-between">
+            <a asp-action="Index"
+               class="btn btn-outline-light">
+                ⬅ Voltar
+            </a>
+
+            <a asp-action="Edit"
+               asp-route-id="@Model.PedidoId"
+               class="btn btn-orange">
+                ✏️ Editar Pedido
+            </a>
+        </div>
+
+    </div>
+</div>

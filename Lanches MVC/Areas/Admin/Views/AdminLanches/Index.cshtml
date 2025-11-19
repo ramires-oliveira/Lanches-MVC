@@ -1,0 +1,98 @@
+﻿@model IEnumerable<LanchesMVC.Models.Lanche>
+
+@{
+    ViewData["Title"] = "Lanches";
+}
+
+<div class="container my-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-orange">🍔 Lanches Cadastrados</h2>
+
+        <a asp-area="Admin"
+           asp-controller="AdminLanches"
+           asp-action="Create"
+           class="btn btn-orange btn-lg">
+            ➕ Novo Lanche
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-dark table-hover align-middle">
+            <thead class="table-header">
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Imagem</th>
+                    <th>Preferido</th>
+                    <th>Estoque</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-light">@item.Nome</td>
+                        <td class="text-muted">@item.DescricaoCurta</td>
+                        <td class="text-light">R$ @item.Preco.ToString("N2")</td>
+
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.ImagemThumbnailUrl))
+                            {
+                                <img src="@item.ImagemThumbnailUrl"
+                             alt="@item.Nome"
+                             style="width:60px; border-radius:6px" />
+                            }
+                            else
+                            {
+                                <span class="text-muted">Sem imagem</span>
+                            }
+                        </td>
+
+                        <td class="text-light">
+                            @(item.IsLanchePreferido ? "✔️" : "—")
+                        </td>
+
+                        <td class="text-light">
+                            @(item.EmEstoque ? "✔️" : "—")
+                        </td>
+
+                        <td class="text-center">
+                            <div class="d-flex justify-content-center gap-2">
+
+                                <a asp-area="Admin"
+                               asp-controller="AdminLanches"
+                               asp-action="Edit"
+                               asp-route-id="@item.LancheId"
+                               class="btn btn-outline-orange btn-sm">
+                                    ✏️
+                                </a>
+
+                                <a asp-area="Admin"
+                               asp-controller="AdminLanches"
+                               asp-action="Details"
+                               asp-route-id="@item.LancheId"
+                               class="btn btn-outline-light btn-sm">
+                                    🔍
+                                </a>
+
+                                <a asp-area="Admin"
+                               asp-controller="AdminLanches"
+                               asp-action="Delete"
+                               asp-route-id="@item.LancheId"
+                               class="btn btn-outline-danger btn-sm">
+                                    🗑
+                                </a>
+
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
