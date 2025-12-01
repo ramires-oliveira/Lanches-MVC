@@ -1,0 +1,85 @@
+﻿@model FileManagerModel
+@{
+    ViewBag.Title = "Arquivos";
+}
+
+<div class="container my-5">
+
+    <h2 class="text-orange mb-4">Gerenciador de Imagens</h2>
+
+    @if (Model.Files != null)
+    {
+        <h4 class="text-light mb-2">Imagens encontradas:</h4>
+        <hr class="border-orange mb-4" />
+
+        <div class="row g-4">
+
+            @foreach (FileInfo file in Model.Files)
+            {
+                var caminho = Model.PathImagesProduto;
+
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card bg-dark border-orange shadow-sm image-card">
+
+                        <img src="~/@caminho/@file.Name"
+                     class="card-img-top img-fluid image-preview"
+                     title="@file.Name"
+                     asp-append-version="true" />
+
+                        <div class="card-body text-center">
+
+                            <p class="text-light small text-truncate" title="@file.Name">
+                                @file.Name
+                            </p>
+
+                            <a href="@Url.Action("Deletefile","AdminImagens",new { fname=file.Name })"
+                       class="btn btn-outline-danger btn-sm w-100">
+                                🗑 Excluir
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    @if (ViewData["Erro"] != null)
+    {
+        <div class="card bg-dark border-danger shadow-lg mt-4">
+            <div class="card-body text-center">
+                <img src="~/images/erro1.png" width="120" class="mb-3" />
+                <h4 class="text-danger fw-bold">
+                    ❌ @ViewData["Erro"]
+                </h4>
+            </div>
+        </div>
+    }
+
+    <hr class="border-orange mt-5" />
+
+    <p class="text-muted">Passe o mouse sobre a imagem para visualizar uma prévia maior.</p>
+
+    <a class="btn btn-outline-light mt-3" asp-controller="AdminImagens" asp-action="Index">
+        ⬅ Voltar
+    </a>
+
+</div>
+
+<style>
+    .image-card {
+        transition: transform .2s ease-in-out, box-shadow .2s ease-in-out;
+        border-radius: 12px;
+    }
+
+        .image-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 15px rgba(255, 136, 0, .5);
+        }
+
+    .image-preview {
+        height: 140px;
+        object-fit: cover;
+        border-bottom: 1px solid #ff8800;
+    }
+</style>

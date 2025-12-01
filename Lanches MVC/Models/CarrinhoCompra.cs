@@ -1,5 +1,5 @@
 ﻿using Lanches_MVC.Context;
-using LanchesMVC.Models;
+using Lanches_MVC.Models;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 

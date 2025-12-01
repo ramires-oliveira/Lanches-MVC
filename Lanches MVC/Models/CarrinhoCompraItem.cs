@@ -1,4 +1,4 @@
-﻿using LanchesMVC.Models;
+﻿using Lanches_MVC.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

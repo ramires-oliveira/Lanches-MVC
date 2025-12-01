@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using LanchesMVC.Models;
+using Lanches_MVC.Models;
 using Lanches_MVC.Context;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;

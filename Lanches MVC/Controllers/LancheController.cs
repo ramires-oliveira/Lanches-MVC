@@ -1,7 +1,6 @@
 ﻿using Lanches_MVC.Models;
 using Lanches_MVC.Repositories.Interfaces;
 using Lanches_MVC.ViewModel;
-using LanchesMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

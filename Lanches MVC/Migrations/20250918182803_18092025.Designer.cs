@@ -25,7 +25,7 @@ namespace Lanches_MVC.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("LanchesMVC.Models.Categoria", b =>
+            modelBuilder.Entity("Lanches_MVC.Models.Categoria", b =>
                 {
                     b.Property<int>("CategoriaId")
                         .ValueGeneratedOnAdd()
@@ -48,7 +48,7 @@ namespace Lanches_MVC.Migrations
                     b.ToTable("Categorias");
                 });
 
-            modelBuilder.Entity("LanchesMVC.Models.Lanche", b =>
+            modelBuilder.Entity("Lanches_MVC.Models.Lanche", b =>
                 {
                     b.Property<int>("LancheId")
                         .ValueGeneratedOnAdd()
@@ -121,9 +121,9 @@ namespace Lanches_MVC.Migrations
                     b.ToTable("CarrinhoCompraItens");
                 });
 
-            modelBuilder.Entity("LanchesMVC.Models.Lanche", b =>
+            modelBuilder.Entity("Lanches_MVC.Models.Lanche", b =>
                 {
-                    b.HasOne("LanchesMVC.Models.Categoria", "Categoria")
+                    b.HasOne("Lanches_MVC.Models.Categoria", "Categoria")
                         .WithMany("Lanches")
                         .HasForeignKey("CategoriaId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -134,14 +134,14 @@ namespace Lanches_MVC.Migrations
 
             modelBuilder.Entity("Lanches_MVC.Models.CarrinhoCompraItem", b =>
                 {
-                    b.HasOne("LanchesMVC.Models.Lanche", "Lanche")
+                    b.HasOne("Lanches_MVC.Models.Lanche", "Lanche")
                         .WithMany()
                         .HasForeignKey("LancheId");
 
                     b.Navigation("Lanche");
                 });
 
-            modelBuilder.Entity("LanchesMVC.Models.Categoria", b =>
+            modelBuilder.Entity("Lanches_MVC.Models.Categoria", b =>
                 {
                     b.Navigation("Lanches");
                 });
