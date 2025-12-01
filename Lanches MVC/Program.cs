@@ -5,6 +5,7 @@ using Lanches_MVC.Repositories.Interfaces;
 using Lanches_MVC.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ReflectionIT.Mvc.Paging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();
 builder.Services.AddControllersWithViews();
+builder.Services.AddPaging(options => {
+    options.ViewName = "Bootstrap4";
+    options.PageParameterName = "pageIndex";
+});
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
@@ -35,6 +40,8 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     options.AccessDeniedPath = "/Account/AccessDenied";
 });
+
+builder.Services.Configure<ConfigurationImagens>(builder.Configuration.GetSection("ConfigurationPastaImagens"));
 
 var app = builder.Build();
 

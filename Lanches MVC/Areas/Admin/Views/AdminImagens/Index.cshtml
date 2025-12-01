@@ -1,0 +1,65 @@
+﻿<div class="container my-5">
+
+    <h2 class="text-orange mb-4">📁 Gerenciamento de Imagens</h2>
+
+    <div class="row g-4">
+
+        <div class="col-md-6">
+            <div class="card bg-dark border-orange shadow-lg h-100">
+                <div class="card-body text-center">
+                    <h4 class="text-orange fw-bold mb-2">Enviar Imagens</h4>
+                    <p class="text-light">Selecione um ou mais arquivos para enviar.</p>
+                    <p class="text-muted">(Arquivos com o mesmo nome serão sobrescritos)</p>
+
+                    <form method="post"
+                          enctype="multipart/form-data"
+                          asp-controller="AdminImagens"
+                          asp-action="UploadFiles"
+                          class="mt-3">
+
+                        <input type="file"
+                               name="files"
+                               multiple
+                               class="form-control bg-dark text-light border-orange mb-3" />
+
+                        <button type="submit" class="btn btn-orange w-100">
+                            📤 Enviar Arquivos
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card bg-dark border-orange shadow-lg h-100">
+                <div class="card-body text-center">
+                    <h4 class="text-orange fw-bold mb-2">Visualizar Imagens</h4>
+                    <p class="text-light">Veja todos os arquivos armazenados no servidor.</p>
+
+                    <form method="post"
+                          enctype="multipart/form-data"
+                          asp-controller="AdminImagens"
+                          asp-action="GetImagens"
+                          class="mt-4">
+
+                        <button type="submit" class="btn btn-outline-orange w-100">
+                            👁 Visualizar Arquivos
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    @if (ViewData["Deletado"] != null)
+    {
+        <div class="alert alert-success mt-4">
+            @ViewData["Deletado"]
+        </div>
+    }
+
+</div>

@@ -1,0 +1,33 @@
+﻿@model int
+
+@{
+    ViewData["Title"] = "404 - Pedido Não Encontrado";
+}
+
+<div class="container my-5">
+
+    <div class="card bg-dark border-orange shadow-lg">
+
+        <div class="card-body text-center py-5">
+
+            <h1 class="text-orange fw-bold mb-3">
+                ❌ Pedido Não Encontrado
+            </h1>
+
+            <p class="text-light fs-5 mb-4">
+                O pedido <span class="text-orange fw-bold">@Model</span> não existe ou não pôde ser localizado.
+            </p>
+
+            <hr class="border-orange opacity-50" />
+
+            <a asp-action="Index"
+               asp-controller="AdminPedidos"
+               class="btn btn-orange px-4 py-2 mt-4">
+                ⬅️ Voltar para a Lista de Pedidos
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

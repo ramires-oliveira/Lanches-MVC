@@ -1,5 +1,4 @@
 ﻿using Lanches_MVC.Models;
-using LanchesMVC.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

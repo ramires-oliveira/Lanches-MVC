@@ -1,4 +1,4 @@
-﻿using LanchesMVC.Models;
+﻿using Lanches_MVC.Models;
 
 namespace Lanches_MVC.Repositories.Interfaces
 {

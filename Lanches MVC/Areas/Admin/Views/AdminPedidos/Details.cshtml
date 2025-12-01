@@ -1,4 +1,4 @@
-﻿@model Lanches_MVC.Models.Pedido
+﻿@model PedidoLancheViewModel
 
 @{
     ViewData["Title"] = "Detalhes do Pedido";
@@ -10,7 +10,7 @@
 
     <div class="card bg-dark text-light shadow rounded p-4">
 
-        <h4 class="text-orange mb-3">Pedido Nº @Model.PedidoId</h4>
+        <h4 class="text-orange mb-3">Pedido Nº @Model.Pedido.PedidoId</h4>
 
         <div class="row">
 
@@ -19,44 +19,93 @@
                 <dl class="row">
 
                     <dt class="col-sm-3 text-orange">Nome</dt>
-                    <dd class="col-sm-9">@Model.Nome</dd>
+                    <dd class="col-sm-9">@Model.Pedido.Nome</dd>
 
                     <dt class="col-sm-3 text-orange">Sobrenome</dt>
-                    <dd class="col-sm-9">@Model.Sobrenome</dd>
+                    <dd class="col-sm-9">@Model.Pedido.Sobrenome</dd>
 
-                    <dt class="col-sm-3 text-orange">Endereço 1</dt>
-                    <dd class="col-sm-9">@Model.Endereco1</dd>
-
-                    <dt class="col-sm-3 text-orange">Endereço 2</dt>
-                    <dd class="col-sm-9">@Model.Endereco2</dd>
+                    <dt class="col-sm-3 text-orange">Endereço</dt>
+                    <dd class="col-sm-9">
+                        @Model.Pedido.Endereco1 @Model.Pedido.Endereco2
+                    </dd>
 
                     <dt class="col-sm-3 text-orange">CEP</dt>
-                    <dd class="col-sm-9">@Model.Cep</dd>
+                    <dd class="col-sm-9">@Model.Pedido.Cep</dd>
 
                     <dt class="col-sm-3 text-orange">Estado</dt>
-                    <dd class="col-sm-9">@Model.Estado</dd>
+                    <dd class="col-sm-9">@Model.Pedido.Estado</dd>
 
                     <dt class="col-sm-3 text-orange">Cidade</dt>
-                    <dd class="col-sm-9">@Model.Cidade</dd>
+                    <dd class="col-sm-9">@Model.Pedido.Cidade</dd>
 
                     <dt class="col-sm-3 text-orange">Telefone</dt>
-                    <dd class="col-sm-9">@Model.Telefone</dd>
+                    <dd class="col-sm-9">@Model.Pedido.Telefone</dd>
 
                     <dt class="col-sm-3 text-orange">Email</dt>
-                    <dd class="col-sm-9">@Model.Email</dd>
+                    <dd class="col-sm-9">@Model.Pedido.Email</dd>
 
                     <dt class="col-sm-3 text-orange">Enviado em</dt>
-                    <dd class="col-sm-9">@Model.PedidoEnviado</dd>
+                    <dd class="col-sm-9">
+                        @Model.Pedido.PedidoEnviado.ToString("dd/MM/yyyy HH:mm")
+                    </dd>
 
                     <dt class="col-sm-3 text-orange">Entregue em</dt>
-                    <dd class="col-sm-9">@Model.PedidoEntregueEm</dd>
+                    <dd class="col-sm-9">
+                        @(Model.Pedido.PedidoEntregueEm.HasValue
+                            ? Model.Pedido.PedidoEntregueEm.Value.ToString("dd/MM/yyyy HH:mm")
+                            : "Ainda não entregue")
+                    </dd>
 
                 </dl>
 
             </div>
         </div>
 
-        <hr class="border-orange" />
+        <hr class="border-orange my-4" />
+
+        <h4 class="text-orange mb-3">Itens do Pedido</h4>
+
+        <div class="table-responsive mb-4">
+            <table class="table table-dark table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>Lanche</th>
+                        <th class="text-center">Qtd</th>
+                        <th class="text-end">Preço</th>
+                        <th class="text-end">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.PedidoDetalhes)
+                    {
+                        <tr>
+                            <td>@item.Lanche.Nome</td>
+
+                            <td class="text-center">
+                                @item.Quantidade
+                            </td>
+
+                            <td class="text-end">
+                                R$ @item.Preco.ToString("N2")
+                            </td>
+
+                            <td class="text-end">
+                                R$ @(item.Preco * item.Quantidade)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-end mb-4">
+            <h4 class="text-orange">
+                Total do Pedido:
+                <span class="text-light">
+                    R$ @Model.Pedido.PedidoTotal.ToString("N2")
+                </span>
+            </h4>
+        </div>
 
         <div class="d-flex justify-content-between">
             <a asp-action="Index"
@@ -65,7 +114,7 @@
             </a>
 
             <a asp-action="Edit"
-               asp-route-id="@Model.PedidoId"
+               asp-route-id="@Model.Pedido.PedidoId"
                class="btn btn-orange">
                 ✏️ Editar Pedido
             </a>

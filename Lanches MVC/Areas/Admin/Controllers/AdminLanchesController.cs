@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using LanchesMVC.Models;
 using Lanches_MVC.Context;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using ReflectionIT.Mvc.Paging;
+using Lanches_MVC.Models;
 
 namespace Lanches_MVC.Areas.Admin.Controllers
 {
@@ -23,10 +24,19 @@ namespace Lanches_MVC.Areas.Admin.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string filter, int pageIndex = 1, string sort = "Nome")
         {
-            var appDbContext = _context.Lanches.Include(l => l.Categoria);
-            return View(await appDbContext.ToListAsync());
+            var resultado = _context.Lanches.AsNoTracking().AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(filter))
+            {
+                resultado = resultado.Where(x => x.Nome.Contains(filter));
+            }
+
+            var model = await PagingList.CreateAsync(resultado, 3, pageIndex, sort, "Nome");
+            model.RouteValue = new RouteValueDictionary { { "filter", filter } };
+
+            return View(model);
         }
 
         public async Task<IActionResult> Details(int? id)

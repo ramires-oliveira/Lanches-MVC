@@ -1,0 +1,53 @@
+﻿<div class="container my-5">
+
+    <h2 class="text-orange mb-4">📂 Resultado da Operação</h2>
+
+    @if (ViewData["Erro"] != null)
+    {
+        <div class="card bg-dark border-danger shadow-lg mb-4">
+            <div class="card-body text-center">
+
+                <img src="~/images/erro1.png" width="120" class="mb-3" />
+
+                <h4 class="text-danger fw-bold">
+                    ❌ @ViewData["Erro"]
+                </h4>
+
+            </div>
+        </div>
+    }
+
+    @if (ViewData["Resultado"] != null)
+    {
+        <div class="card bg-dark border-orange shadow-lg">
+            <div class="card-body">
+
+                <h4 class="text-orange fw-bold mb-3">
+                    ✔️ @ViewData["Resultado"]
+                </h4>
+
+                <hr class="border-orange" />
+
+                @if (ViewBag.Arquivos != null)
+                {
+                    <h5 class="text-light mb-3">📁 Arquivos encontrados:</h5>
+
+                    <ul class="list-group bg-dark">
+                        @foreach (string item in ViewBag.Arquivos)
+                        {
+                            <li class="list-group-item bg-dark text-light border-orange">
+                                🔸 @item
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p class="text-muted">Nenhum arquivo foi retornado.</p>
+                }
+
+            </div>
+        </div>
+    }
+
+</div>

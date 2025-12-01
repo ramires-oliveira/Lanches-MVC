@@ -1,6 +1,6 @@
 ﻿using Lanches_MVC.Context;
 using Lanches_MVC.Repositories.Interfaces;
-using LanchesMVC.Models;
+using Lanches_MVC.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lanches_MVC.Repositories
