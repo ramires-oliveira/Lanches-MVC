@@ -1,23 +1,297 @@
-﻿<div class="container my-5">
+﻿<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-    <div class="bg-dark p-5 rounded shadow text-center">
+<script type="text/javascript">
 
-        <h2 class="text-orange mb-3">👨‍💼 Área do Administrador</h2>
+    google.charts.load('current', { packages: ['corechart', 'bar'] });
+    google.charts.setOnLoadCallback(CarregaDadosAnual);
+    google.charts.setOnLoadCallback(CarregaDadosMensal);
+    google.charts.setOnLoadCallback(CarregaDadosSemanal);
 
-        <p class="text-light fs-5">
-            Bem-vindo ao painel administrativo!
-            Utilize o menu acima para gerenciar categorias, lanches, pedidos e muito mais.
-        </p>
+    function CarregaDadosAnual() {
+        $.ajax({
+            url: '@Url.Action("VendasLanches", "AdminGrafico")',
+            data: { dias: 360 },
+            dataType: "json",
+            type: "GET",
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                toastr.error(err.message);
+            },
+            success: function (data) {
+                GraficoVendasLanchesAnual(data);
+                return false;
+            }
+        });
+        return false;
+    }
 
-        <hr class="border-orange my-4" />
+    function CarregaDadosMensal() {
+        $.ajax({
+            url: '@Url.Action("VendasLanches", "AdminGrafico")',
+            data: { dias: 30 },
+            dataType: "json",
+            type: "GET",
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                toastr.error(err.message);
+            },
+            success: function (data) {
+                GraficoVendasLanchesMensal(data);
+                return false;
+            }
+        });
+        return false;
+    }
 
-        <a asp-area=""
-           asp-controller="Home"
-           asp-action="Index"
-           class="btn btn-outline-orange btn-lg">
-            ⬅ Voltar para a Home Page
-        </a>
+    function CarregaDadosSemanal() {
+        $.ajax({
+            url: '@Url.Action("VendasLanches", "AdminGrafico")',
+            data: { dias: 7 },
+            dataType: "json",
+            type: "GET",
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                toastr.error(err.message);
+            },
+            success: function (data) {
+                GraficoVendasLanchesSemanal(data);
+                return false;
+            }
+        });
+        return false;
+    }
+
+    function GraficoVendasLanchesAnual(data) {
+
+        var dataArray = [
+            ['Lanche', 'Quantidade', 'Valor (R$)']
+        ];
+
+        if (!data || data.length === 0) {
+            $('#anual_div').html(
+                '<div style="color:#ff8800; font-size:20px; text-align:center; margin-top:150px;">' +
+                'Nenhuma venda encontrada no último ano.' +
+                '</div>'
+            );
+            return;
+        }
+
+        $.each(data, function (i, item) {
+            dataArray.push([item.lancheNome, item.lanchesQuantidade, item.lanchesValorTotal]);
+        });
+
+        var data = google.visualization.arrayToDataTable(dataArray);
+
+        var options = {
+            chartArea: {
+                width: '70%',
+                backgroundColor: '#222'
+            },
+            backgroundColor: '#222',
+            legend: {
+                textStyle: { color: '#fff' }
+            },
+            colors: ['#ff8800', '#ffaa44'],
+            hAxis: {
+                title: 'Valor Total (R$)',
+                minValue: 0,
+                textStyle: { color: '#fff' },
+                titleTextStyle: { color: '#ff8800' },
+                gridlines: { color: '#444' }
+            },
+            vAxis: {
+                title: 'Lanches',
+                textStyle: { color: '#fff' },
+                titleTextStyle: { color: '#ff8800' }
+            },
+            bar: { groupWidth: "60%" }
+        };
+
+        var chart = new google.visualization.BarChart(
+            document.getElementById('anual_div')
+        );
+
+        chart.draw(data, options);
+    }
+
+    function GraficoVendasLanchesMensal(data) {
+
+        var dataArray = [
+            ['Lanche', 'Quantidade', 'Valor (R$)']
+        ];
+
+        if (!data || data.length === 0) {
+            $('#mensal_div').html(
+                '<div style="color:#ff8800; font-size:20px; text-align:center; margin-top:150px;">' +
+                'Nenhuma venda encontrada nos últimos 30 dias.' +
+                '</div>'
+            );
+            return;
+        }
+
+        $.each(data, function (i, item) {
+            dataArray.push([
+                item.lancheNome,
+                item.lanchesQuantidade,
+                item.lanchesValorTotal
+            ]);
+        });
+
+        var tabela = google.visualization.arrayToDataTable(dataArray);
+
+        var options = {
+            chartArea: {
+                width: '70%',
+                backgroundColor: '#222'
+            },
+            backgroundColor: '#222',
+            legend: {
+                textStyle: { color: '#fff' }
+            },
+
+            colors: ['#ff8800', '#ffaa44'],
+
+            hAxis: {
+                title: 'Lanches',
+                textStyle: { color: '#fff' },
+                titleTextStyle: { color: '#ff8800' },
+                gridlines: { color: '#444' }
+            },
+            vAxis: {
+                title: 'Valor Total (R$)',
+                textStyle: { color: '#fff' },
+                titleTextStyle: { color: '#ff8800' }
+            },
+
+            animation: {
+                duration: 1200,
+                easing: 'out',
+                startup: true
+            }
+        };
+
+        var chart = new google.visualization.ColumnChart(
+            document.getElementById('mensal_div')
+        );
+
+        chart.draw(tabela, options);
+    }
+
+    function GraficoVendasLanchesSemanal(data) {
+
+        var dataArray = [
+            ['Lanche', 'Quantidade', 'Valor (R$)']
+        ];
+
+        if (!data || data.length === 0) {
+            $('#semanal_div').html(
+                '<div style="color:#ff8800; font-size:20px; text-align:center; margin-top:150px;">' +
+                'Nenhuma venda encontrada nos últimos 7 dias.' +
+                '</div>'
+            );
+            return;
+        }
+
+        $.each(data, function (i, item) {
+            dataArray.push([
+                item.lancheNome,
+                item.lanchesQuantidade,
+                item.lanchesValorTotal
+            ]);
+        });
+
+        var tabela = google.visualization.arrayToDataTable(dataArray);
+
+        var options = {
+
+            curveType: 'function',
+
+            legend: {
+                position: 'bottom',
+                textStyle: { color: '#fff' }
+            },
+
+            chartArea: {
+                width: '70%',
+                backgroundColor: '#222'
+            },
+
+            backgroundColor: '#222',
+
+            colors: ['#ff8800', '#ffaa44'],
+
+            hAxis: {
+                title: 'Lanches',
+                textStyle: { color: '#fff' },
+                titleTextStyle: { color: '#ff8800' },
+                gridlines: { color: '#444' }
+            },
+
+            vAxis: {
+                title: 'Valor Total (R$)',
+                textStyle: { color: '#fff' },
+                titleTextStyle: { color: '#ff8800' },
+                gridlines: { color: '#444' }
+            }
+        };
+
+        var chart = new google.visualization.LineChart(
+            document.getElementById('semanal_div')
+        );
+
+        chart.draw(tabela, options);
+    }
+</script>
+
+<div class="container my-5">
+
+    <div class="row g-4">
+
+        <div class="col-lg-6 col-md-6 col-12">
+            <div class="chart-card shadow rounded bg-dark border-orange p-3">
+                <h4 class="chart-title">📊 Vendas - Últimos 360 dias</h4>
+                <div id="anual_div" class="chart-box"></div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-12">
+            <div class="chart-card shadow rounded bg-dark border-orange p-3">
+                <h4 class="chart-title">📊 Vendas - Últimos 30 dias</h4>
+                <div id="mensal_div" class="chart-box"></div>
+            </div>
+        </div>
+
+        <div class="col-lg-12 col-12">
+            <div class="chart-card shadow rounded bg-dark border-orange p-3">
+                <h4 class="chart-title">📊 Vendas - Últimos 7 dias</h4>
+                <div id="semanal_div" class="chart-box"></div>
+            </div>
+        </div>
 
     </div>
 
 </div>
+
+<style>
+    .chart-card {
+        border: 2px solid #ff8800;
+        min-height: 450px;
+        padding-bottom: 20px;
+    }
+
+    .chart-title {
+        color: #ff8800;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .chart-box {
+        width: 100%;
+        height: 350px;
+    }
+
+
+</style>
+

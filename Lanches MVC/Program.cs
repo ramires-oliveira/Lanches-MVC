@@ -1,3 +1,4 @@
+using Lanches_MVC.Areas.Admin.Servicos;
 using Lanches_MVC.Context;
 using Lanches_MVC.Models;
 using Lanches_MVC.Repositories;
@@ -26,6 +27,7 @@ builder.Services.AddTransient<IPedidoRepository, PedidoRepository>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
 builder.Services.AddScoped(x => CarrinhoCompra.GetCarrinhoCompra(x));
+builder.Services.AddScoped<GraficoVendasService>();
 
 builder.Services.AddAuthorization(options =>
 {
