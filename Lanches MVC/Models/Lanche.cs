@@ -9,17 +9,17 @@ namespace Lanches_MVC.Models
         [Key]
         public int LancheId { get; set; }
 
-        [StringLength(80, MinimumLength = 10, ErrorMessage = "Tamanho máximo 80 caracteres")]
+        [StringLength(80, MinimumLength = 5, ErrorMessage = "Tamanho máximo 80 caracteres")]
         [Required(ErrorMessage = "Informe o nome do lanche")]
         [Display(Name = "Nome")]
         public string Nome { get; set; }
 
-        [StringLength(100, MinimumLength = 20, ErrorMessage = "Tamanho máximo 100 caracteres")]
+        [StringLength(100, ErrorMessage = "Tamanho máximo 100 caracteres")]
         [Required(ErrorMessage = "Informe a descrição do lanche")]
         [Display(Name = "Descrição do lanche")]
         public string DescricaoCurta { get; set; }
 
-        [StringLength(300, MinimumLength = 50, ErrorMessage = "Tamanho máximo 300 caracteres")]
+        [StringLength(300, ErrorMessage = "Tamanho máximo 300 caracteres")]
         [Required(ErrorMessage = "Informe a descrição detalhada do lanche")]
         [Display(Name = "Descrição detalhada do lanche")]
         public string DescricaoDetalhada { get; set; }
@@ -28,6 +28,7 @@ namespace Lanches_MVC.Models
         [Required(ErrorMessage = "Informe o preço do lanche")]
         [Display(Name = "Preço do lanche")]
         [Range(1, 999.99, ErrorMessage = "O preço deve estar entre R$ 1,00 e R$ 999,99")]
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public decimal Preco { get; set; }
 
         [Display(Name = "Imagem do lanche")]

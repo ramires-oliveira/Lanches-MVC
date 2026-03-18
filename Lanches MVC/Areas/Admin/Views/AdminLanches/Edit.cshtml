@@ -21,17 +21,37 @@
 
             <div class="row">
 
-                <div class="mb-3 col-md-6">
-                    <label asp-for="Nome" class="form-label text-light"></label>
-                    <input asp-for="Nome" class="form-control bg-dark text-light border-orange" />
-                    <span asp-validation-for="Nome" class="text-danger"></span>
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label asp-for="Nome" class="form-label text-light"></label>
+                        <input asp-for="Nome" class="form-control bg-dark text-light border-orange" />
+                        <span asp-validation-for="Nome" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Categoria" class="form-label text-light"></label>
+                        <select asp-for="CategoriaId"
+                                class="form-control bg-dark text-light border-orange"
+                                asp-items="ViewBag.CategoriaId">
+                            <option value="">Selecione uma categoria</option>
+                        </select>
+                        <span asp-validation-for="CategoriaId" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="Preco" class="form-label text-light"></label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-orange text-dark">R$</span>
+                            <input asp-for="Preco"
+                                   type="text"
+                                   asp-format="{0:N2}"
+                                   id="PrecoLanche"
+                                   class="form-control bg-dark text-light border-orange" />
+                        </div>
+                        <span asp-validation-for="Preco" class="text-danger"></span>
+                    </div>
                 </div>
 
-                <div class="mb-3 col-md-6">
-                    <label asp-for="Preco" class="form-label text-light"></label>
-                    <input asp-for="Preco" class="form-control bg-dark text-light border-orange" />
-                    <span asp-validation-for="Preco" class="text-danger"></span>
-                </div>
 
                 <div class="mb-3">
                     <label asp-for="DescricaoCurta" class="form-label text-light"></label>
@@ -47,25 +67,30 @@
                     <span asp-validation-for="DescricaoDetalhada" class="text-danger"></span>
                 </div>
 
-                <div class="mb-3 col-md-6">
-                    <label asp-for="ImagemUrl" class="form-label text-light"></label>
-                    <input asp-for="ImagemUrl" class="form-control bg-dark text-light border-orange" />
-                    <span asp-validation-for="ImagemUrl" class="text-danger"></span>
-                </div>
+                <div class="row align-items-center">
+                    <div class="mb-3 col-md-6">
+                        <label asp-for="ImagemUrl" class="form-label text-light"></label>
+                        <select asp-for="ImagemUrl"
+                                class="form-control bg-dark text-light border-orange"
+                                asp-items="ViewBag.Imagens"
+                                id="imagemSelect">
+                            <option value="">Selecione uma imagem</option>
+                        </select>
+                        <span asp-validation-for="ImagemUrl" class="text-danger"></span>
+                    </div>
 
-                <div class="mb-3 col-md-6">
-                    <label asp-for="ImagemThumbnailUrl" class="form-label text-light"></label>
-                    <input asp-for="ImagemThumbnailUrl" class="form-control bg-dark text-light border-orange" />
-                    <span asp-validation-for="ImagemThumbnailUrl" class="text-danger"></span>
-                </div>
-
-                <div class="col-md-6 mb-3">
-                    <label asp-for="Categoria" class="form-label text-light"></label>
-                    <select asp-for="CategoriaId"
-                            class="form-control bg-dark text-light border-orange"
-                            asp-items="ViewBag.CategoriaId">
-                    </select>
-                    <span asp-validation-for="CategoriaId" class="text-danger"></span>
+                    <div class="mb-3 col-md-6 text-center">
+                        <img id="previewImagem"
+                             alt="Imagem do lanche"
+                             style="display:none;
+                            max-width:180px;
+                            max-height:180px;
+                            object-fit:contain;
+                            border-radius:8px;
+                            border:1px solid #ff9800;
+                            padding:6px;
+                            background:#1e1e1e;" />
+                    </div>
                 </div>
 
                 <div class="col-md-6 d-flex align-items-center gap-4 mt-3">
@@ -103,3 +128,35 @@
 
     </div>
 </div>
+
+@if (!string.IsNullOrEmpty(Model.ImagemUrl))
+{
+    <script>
+        const select = document.getElementById("imagemSelect");
+        const img = document.getElementById("previewImagem");
+        const imagemUrl = "@Model.ImagemUrl";
+
+        const existeNaLista = Array.from(select.options)
+            .some(option => option.value === imagemUrl);
+
+        if (existeNaLista) {
+            img.src = imagemUrl;
+            img.style.display = "block";
+            select.value = imagemUrl;
+        }
+    </script>
+}
+
+<script>
+    document.getElementById("imagemSelect").addEventListener("change", function () {
+        const img = document.getElementById("previewImagem");
+
+        if (this.value) {
+            img.src = this.value;
+            img.style.display = "block";
+        } else {
+            img.src = "";
+            img.style.display = "none";
+        }
+    });
+</script>

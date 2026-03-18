@@ -1,9 +1,10 @@
 ﻿$(document).ready(function () {
 
-    $("[data-mask='phone']").inputmask({
-        mask: ["(99) 9999-9999", "(99) 99999-9999"],
-        keepStatic: true
-    });
+    $(document).ready(function () {
+        $('#PrecoLanche').mask('#.##0,00', {
+            reverse: true,
+            placeholder: "0,00"
+        });
 
-    $("[data-mask='cep']").inputmask("99999-999");
+    });
 });

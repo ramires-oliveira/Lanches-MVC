@@ -27,13 +27,13 @@ namespace Lanches_MVC.Areas.Admin.Controllers
         {
             if (files == null || files.Count == 0)
             {
-                ViewData["Erro"] = "Error: Arquivo(s) não selecionado(s)";
+                ViewData["Erro"] = "Nenhuma imagem selecionada.";
                 return View(ViewData);
             }
 
             if (files.Count > 10)
             {
-                ViewData["Error"] = "Error: Quantidade de arquivos excedeu o limite";
+                ViewData["Error"] = "Quantidade de imagens excedeu o limite.";
                 return View(ViewData);
             }
 
@@ -49,7 +49,7 @@ namespace Lanches_MVC.Areas.Admin.Controllers
                 {
                     var fileNameWithPath = string.Concat(filePath, "\\", formFile.FileName);
 
-                    filePathsName.Add(fileNameWithPath);
+                    filePathsName.Add(formFile.FileName);
 
                     using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
                     {
@@ -58,7 +58,7 @@ namespace Lanches_MVC.Areas.Admin.Controllers
                 }
             }
 
-            ViewData["Resultado"] = $"{files.Count} arquivos foram enviados ao servidor, " + $"com tamanho total de: {size} bytes";
+            ViewData["Resultado"] = $"{files.Count} imagem(s) enviada(s) ao servidor, " + $"com tamanho total de: {size} bytes";
 
             ViewBag.Arquivos = filePathsName;
 
@@ -78,7 +78,7 @@ namespace Lanches_MVC.Areas.Admin.Controllers
 
             if (files.Length == 0)
             {
-                ViewData["Erro"] = $"Nenhum arquivo encontrado na pasta {userImagesPath}";
+                ViewData["Erro"] = $"Nenhuma imagem encontrada.";
             }
 
             model.Files = files;
@@ -93,7 +93,7 @@ namespace Lanches_MVC.Areas.Admin.Controllers
             if ((System.IO.File.Exists(_imagemDeleta)))
             {
                 System.IO.File.Delete(_imagemDeleta);
-                ViewData["Deletado"] = $"Arquivo(s) {_imagemDeleta} deletado com sucesso";
+                ViewData["Deletado"] = $"Imagem {fname} deletada com sucesso.";
             }
             return View("index");
         }
