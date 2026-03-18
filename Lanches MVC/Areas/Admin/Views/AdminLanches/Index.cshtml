@@ -52,10 +52,9 @@
                         <td class="text-light">R$ @item.Preco.ToString("N2")</td>
 
                         <td>
-                            @if (!string.IsNullOrEmpty(item.ImagemThumbnailUrl))
+                            @if (!string.IsNullOrEmpty(item.ImagemUrl))
                             {
-                                <img src="@item.ImagemThumbnailUrl"
-                             alt="@item.Nome"
+                                <img src="@item.ImagemUrl"
                              style="width:60px; border-radius:6px" />
                             }
                             else

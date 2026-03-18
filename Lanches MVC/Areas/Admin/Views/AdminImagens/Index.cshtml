@@ -57,8 +57,10 @@
 
     @if (ViewData["Deletado"] != null)
     {
-        <div class="alert alert-success mt-4">
+        <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
             @ViewData["Deletado"]
+
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
         </div>
     }
 

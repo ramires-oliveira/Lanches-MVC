@@ -30,8 +30,6 @@
 
                 @if (ViewBag.Arquivos != null)
                 {
-                    <h5 class="text-light mb-3">📁 Arquivos encontrados:</h5>
-
                     <ul class="list-group bg-dark">
                         @foreach (string item in ViewBag.Arquivos)
                         {
@@ -48,6 +46,13 @@
 
             </div>
         </div>
+
     }
+
+    <hr class="border-orange mt-5" />
+
+    <a class="btn btn-outline-light mt-3" asp-controller="AdminImagens" asp-action="Index">
+        ⬅ Voltar
+    </a>
 
 </div>
